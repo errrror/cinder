@@ -15,7 +15,7 @@
 
 确认属于开发任务后，任务简单、改动少、只加一个页面都不是跳过 SOP 的理由。读取本入口不代表已完成任务路由；在探索实现方案、编辑业务文件或执行变更命令前，必须完成：
 
-1. 读取 `.wally/core/entry.md`，运行 `git branch --show-current`，按分支定位任务；无任务则先读 `.wally/profiles/project.md`，用 `.wally/scripts/create_task.py` 创建任务。不要猜测任务目录或套用其他任务。
+1. 读取 `.wally/core/entry.md`，运行 `git branch --show-current`，按分支定位任务。无任务时先读 `.wally/profiles/project.md`，询问用户是否为本次 SOP 新切一条分支，等答复后再用 `.wally/scripts/create_task.py` 在选定分支上创建任务。不要猜测任务目录、套用其他任务，或把当前分支直接当成任务分支。
 2. 运行 `python3 .wally/scripts/sop_context.py`，读取它实际输出的任务 overview、版本规则、项目配置和当前阶段。输出缺文件、多任务匹配或其他错误时先修复；不能绕过并继续实现。
 3. 在首次工作说明中报告真实的分支、任务目录、规则版本和当前阶段；无任务时如实说明需要创建。不得未读取就声称已读取。
 4. 进入每个阶段前读取对应阶段文件与所需绑定规则，填写 Clarify 和 Plan 后再实现。压缩上下文、恢复会话、切换分支及委派子 Agent 后重新定位；委派时明确传入任务目录、规则版本和阶段，子 Agent 也执行本检查。
