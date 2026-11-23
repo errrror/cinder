@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "deploy": {
+    "command": "",
+    "guide": "doc/source/install/",
+    "verify": "",
+    "rollback": "",
+    "readiness": "pending",
+    "gaps": [
+      "仓库未提供目标部署环境、地址与资源归属；setup.cfg 仅声明 cinder-api / cinder-scheduler / cinder-volume / cinder-backup 控制台入口，无实际部署/同步命令",
+      "etc/ 下为示例配置，未指向真实部署环境；缺少配置与凭证获取入口及部署授权边界（不记录明文）",
+      "缺少生效/健康检查命令、预期结果与失败定位方法",
+      "缺少回滚命令、触发条件以及清理/释放与保留约定"
+    ]
+  },
+  "it": {
+    "command": "tox -e functional",
+    "guide": "tox.ini; cinder/tests/tempest/README.rst",
+    "success_criteria": "以 ostestr/tempest 逐用例结果与汇总报告判定，退出码仅作参考；零用例或全部跳过不算通过",
+    "readiness": "pending",
+    "gaps": [
+      "tox.ini 的 functional 环境设置 OS_TEST_PATH=./cinder/tests/functional，依赖已部署的 Cinder 与 DB/RabbitMQ 等服务；当前仓库未提供可运行的目标环境与依赖",
+      "setup.cfg 声明 in-tree Tempest 插件 cinder.tests.tempest.plugin:CinderTempestPlugin，但仓库内无 Tempest 运行配置、鉴权与隔离测试数据",
+      "缺少逐用例/汇总报告落盘位置约定及 CI 门禁证据"
+    ]
+  }
+}
