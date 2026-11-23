@@ -86,8 +86,10 @@ def read(root, relative):
 
 def route(root):
     entry = read(root, ".wally/core/entry.md")
+    # text= and capture_output= need Python 3.7. PIPE + universal_newlines work on 3.6.
     git = subprocess.run(["git", "-C", str(root), "branch", "--show-current"],
-                         text=True, capture_output=True, timeout=3)
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                         universal_newlines=True, timeout=3)
     branch = git.stdout.strip() if git.returncode == 0 else ""
     if not branch:
         raise ValueError("Cannot route SOP without an actual Git branch; resolve Git state first.")
@@ -103,9 +105,13 @@ def route(root):
     if len(matches) != 1:
         if matches:
             raise ValueError("Multiple SOP tasks match branch " + branch + "; resolve ambiguity before changes.")
-        raise ValueError("No SOP task for branch " + branch + ". Read .wally/profiles/project.md, then run "
-                         "python3 .wally/scripts/create_task.py YYYY-MM-DD_title --branch " + shlex.quote(branch) +
-                         ". Use a task branch when the current branch is main/master.")
+        raise ValueError(
+            "No SOP task for branch " + branch + ". Before creating a task, ask the user whether to cut "
+            "a new branch for this SOP and wait for the answer. Do not bind " + shlex.quote(branch) +
+            " until they choose. Read .wally/profiles/project.md, then run "
+            "python3 .wally/scripts/create_task.py YYYY-MM-DD_title --branch <chosen-branch>. "
+            "Create and switch first when they want a new branch; staying is allowed only off main/master/HEAD. "
+            "The script performs no Git operations.")
     overview, text = matches[0]
     rules = re.search(RULES, text)
     if not rules:
