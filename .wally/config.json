@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "deploy": {
+    "command": "cd contrib/block-box && make && docker-compose up -d",
+    "guide": ".wally/docs/devops/test-env-deploy.md",
+    "verify": "cd contrib/block-box && docker-compose ps",
+    "rollback": "",
+    "readiness": "pending",
+    "gaps": [
+      "contrib/block-box 为可选容器化 demo（noauth），非项目正式测试环境；未指定目标测试环境标识/负责人/授权边界",
+      "凭证仅有 cinder.rc 的 noauth 示例值，无正式凭证获取方式",
+      "仓库内未定义回滚命令、触发条件与数据清理步骤",
+      "缺少部署验收判据（有效版本核对、健康检查期望结果）"
+    ]
+  },
+  "it": {
+    "command": "tox -e functional",
+    "guide": ".wally/docs/integration_test/integration_test.md",
+    "success_criteria": "",
+    "readiness": "pending",
+    "gaps": [
+      "tox -e functional 为仓库内 functional 测试（OS_TEST_PATH=./cinder/tests/functional），非针对已部署环境的端到端 IT",
+      "setup.cfg 注册 tempest 插件 cinder.tests.tempest.plugin:CinderTempestPlugin，但仓库内无 tempest run 入口与目标环境",
+      "未提供集成测试环境、认证/配置获取方式与数据准备/隔离方案",
+      "未定义验收判据（通过标准、失败分类、清理与证据位置）"
+    ]
+  }
+}
