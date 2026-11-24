@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "deploy": {
+    "command": "cd contrib/block-box && make && docker-compose up -d",
+    "guide": ".wally/docs/devops/test-env-deploy.md",
+    "verify": "cd contrib/block-box && docker run -it -e OS_AUTH_TYPE=noauth -e CINDERCLIENT_BYPASS_URL=http://cinder-api:8776/v3 -e OS_PROJECT_ID=foo -e OS_VOLUME_API_VERSION=3.27 --network blockbox_default cinderclient list",
+    "rollback": "",
+    "readiness": "pending",
+    "gaps": [
+      "无真实回滚入口：contrib/block-box 的 README.md、Makefile、docker-compose.yml 与 init 脚本均未定义 docker-compose down、镜像版本回退或数据清理命令",
+      "部署验收判据未定义：README 仅给出 cinderclient list 访问示例，未说明服务就绪/健康检查、生效版本核对与预期结果或通过标准",
+      "缺少测试环境标识/负责人、访问授权边界及环境保留/释放约定"
+    ]
+  },
+  "it": {
+    "command": "tox -e functional",
+    "guide": ".wally/docs/integration_test/integration_test.md",
+    "success_criteria": "",
+    "readiness": "pending",
+    "gaps": [
+      "无 success_criteria：仓库未定义 IT 通过/失败判据（全部用例通过、空跑或全 skip 不算通过、聚合门禁与覆盖率阈值）",
+      "Tempest 集成入口 tox -e all-plugin -- volume 依赖仓外 devstack 环境（/opt/stack/tempest、etc/tempest.conf），仓库内无可复现的目标环境准备与凭证获取方式",
+      "缺少 IT 用例清单/用例-断言映射及执行后数据清理与回滚说明"
+    ]
+  }
+}
