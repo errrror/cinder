@@ -31,6 +31,7 @@ from cinder.api.v3 import group_snapshots
 from cinder.api.v3 import group_specs
 from cinder.api.v3 import group_types
 from cinder.api.v3 import groups
+from cinder.api.v3 import hello
 from cinder.api.v3 import limits
 from cinder.api.v3 import messages
 from cinder.api.v3 import resource_filters
@@ -54,6 +55,12 @@ class APIRouter(cinder.api.openstack.APIRouter):
                        action='index')
 
         mapper.redirect("", "/")
+
+        self.resources['hello'] = hello.create_resource()
+        mapper.connect("hello", "/hello",
+                       controller=self.resources['hello'],
+                       action='index',
+                       conditions={"method": ["GET"]})
 
         self.resources['volumes'] = volumes.create_resource(ext_mgr)
         mapper.resource("volume", "volumes",

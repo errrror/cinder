@@ -1,0 +1,101 @@
+# 2026-11-26_hello-world-api
+
+## Meta
+
+| 项 | 值 |
+|----|----|
+| 分支 | `feature/hello-world-api` |
+| WallyTask | `WallyTask: 01a21842-1fc8-7708-a016-0fa8e6aea18c` |
+| SOP 版本 | 2.0 |
+| SOP 规则 | sop-runtime/builtin/0ac183662b5491b3/core |
+| 项目配置 | .wally/profiles/project.md |
+| 流程 | 6 步 |
+| 摘要 | 新增 GET /hello 接口，返回 {"message": "Hello, World!"} JSON，无鉴权 |
+| 任务类型 | 功能新增 |
+| 状态 | 已提交，PR #8 已创建 |
+| 创建日期 | 2026-11-26 |
+| 负责人 | 用户 |
+| Issue | 无 |
+| 风险等级及依据 | 低：局部新增路由与控制器，可逆，不改现有接口与数据结构 |
+| 授权范围与停止边界 | 用户已授权新增 hello 接口；Commit/Push/MR 需另行授权 |
+| 执行位置 / 委托决策 | 本地，无委托 |
+| 测试环境 | 本地 venv 可执行 UT；Deploy/IT 未配置，按规则 SKIPPED |
+
+## Progress
+
+- [x] 01. Clarify → [01-clarify.md](./01-clarify.md)
+- [x] 02. Plan → [02-plan.md](./02-plan.md)
+- [x] 03. Implement + UT + Docs → [03-implement.md](./03-implement.md)
+- [x] 04. Deploy [SKIPPED: not configured] → [04-deploy.md](./04-deploy.md)
+- [x] 05. IT [SKIPPED: not configured] → [05-it.md](./05-it.md)
+- [x] 06. Review + Commit → [06-review-commit.md](./06-review-commit.md)
+
+## 当前步骤
+
+- 步骤：06. Review + Commit（Review 通过，等待用户授权 Commit/Push/MR）
+- 文件：[06-review-commit.md](./06-review-commit.md)
+- 上次更新：2026-11-26 22:43:42
+
+## 时间记录
+
+| # | 步骤 | 开始时间 | 结束时间 | 耗时 | 对话轮次 | 备注 |
+|---|------|---------|---------|------|---------|------|
+| 01 | Clarify | 2026-11-26 22:29:48+08:00 | 2026-11-26 22:32:12+08:00 | 2m24s | 1 | 用户确认分支与接口约定 |
+| 02 | Plan | 2026-11-26 22:32:12+08:00 | 2026-11-26 22:32:35+08:00 | 23s | 1 | 源码核验后写出最小改动方案 |
+| 03 | Implement + UT + Docs | 2026-11-26 22:32:35+08:00 | 2026-11-26 22:42:14+08:00 | 9m39s | 1 | Red/Green/覆盖率/Docs/CR 完成；5/5 通过、100% 覆盖 |
+| 04 | Deploy | 2026-11-26 22:31:53+08:00 | 2026-11-26 22:31:53+08:00 | 0s | 0 | SKIPPED: not configured; decision time, not execution |
+| 05 | IT | 2026-11-26 22:31:53+08:00 | 2026-11-26 22:31:53+08:00 | 0s | 0 | SKIPPED: not configured; decision time, not execution |
+| 06 | Review + Commit | 2026-11-26 22:43:07+08:00 | 2026-11-26 22:43:42+08:00 | 35s | 1 | Review PASS；提交未执行，等待用户授权 |
+
+## AI 交互 Token 报告（Commit 阶段生成）
+
+<!-- TOKEN_USAGE_START -->
+| # | 客户端 | 时间 | Prompt | 模型 | 输入合计 | 非缓存输入 | 缓存读 | 缓存写 | 输出 | 其中 reasoning | Tokens | Credit |
+|---|--------|------|--------|------|----------|------------|--------|--------|------|----------------|--------|--------|
+| 1 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 57,957 | 45,669 | 12,288 | 0 | 1,019 | — | 58,976 | — |
+| 2 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 92,907 | 47,467 | 45,440 | 0 | 327 | — | 93,234 | — |
+| 3 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 95,498 | 48,266 | 47,232 | 0 | 1,173 | — | 96,671 | — |
+| 4 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 100,948 | 52,820 | 48,128 | 0 | 445 | — | 101,393 | — |
+| 5 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 107,376 | 54,768 | 52,608 | 0 | 117 | — | 107,493 | — |
+| 6 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 111,551 | 57,023 | 54,528 | 0 | 138 | — | 111,689 | — |
+| 7 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 114,213 | 57,381 | 56,832 | 0 | 141 | — | 114,354 | — |
+| 8 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 116,726 | 59,510 | 57,216 | 0 | 231 | — | 116,957 | — |
+| 9 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 119,227 | 59,963 | 59,264 | 0 | 197 | — | 119,424 | — |
+| 10 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 120,843 | 61,067 | 59,776 | 0 | 1,451 | — | 122,294 | — |
+| 11 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 123,680 | 62,752 | 60,928 | 0 | 550 | — | 124,230 | — |
+| 12 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 127,804 | 65,212 | 62,592 | 0 | 1,299 | — | 129,103 | — |
+| 13 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 131,590 | 66,566 | 65,024 | 0 | 2,150 | — | 133,740 | — |
+| 14 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 135,975 | 69,543 | 66,432 | 0 | 510 | — | 136,485 | — |
+| 15 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 139,469 | 70,093 | 69,376 | 0 | 893 | — | 140,362 | — |
+| 16 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 142,915 | 73,027 | 69,888 | 0 | 5,814 | — | 148,729 | — |
+| 17 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 151,864 | 79,032 | 72,832 | 0 | 146 | — | 152,010 | — |
+| 18 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 158,661 | 79,813 | 78,848 | 0 | 5,323 | — | 163,984 | — |
+| 19 | CodeBuddy | 2026-11-26 22:30:43 | _未提取到 prompt_ | `hy4-flash-ioa` | 164,959 | 85,343 | 79,616 | 0 | 788 | — | 165,747 | — |
+| **累计** | — | — | **记录数：19 轮** | — | 2,314,163 | 1,195,315 | 1,118,848 | 0 | 22,712 | 0 | **2,336,875** | **—** |
+
+> Codex 采集状态：未登记采集状态，不能据此认定用量完整或为零。
+
+> 口径：`输入合计 = 非缓存输入 + 缓存读 + 缓存写`；`Tokens = 输入合计 + 输出`；reasoning 是输出子项，不再次累加。逐请求明细在本任务 `token.json`，该文件不提交。
+> 粒度：本表一行 = 一轮用户对话，与 Cursor 的一个 `generation_id` 相同。Cursor 上报的是整轮累计值，采集时已按最大值去重，这里不再相加。Codex 按同一线程的 `root_turn_id`、CodeBuddy 按同一会话里 prompt 相同的连续请求，把该轮多次模型调用的 token **相加**为一行（含每次调用自己的缓存读）。Codex、Cursor 的 Credit 显示 `—`，不估算费用。
+> 快照：仅包含生成报告时已落盘且已采集的用量，不包含之后发生的请求。
+<!-- TOKEN_USAGE_END -->
+
+## 关键决策备忘
+
+- 2026-11-26 22:29:48 用户确认新建 `feature/hello-world-api` 分支（两仓库），接口为 `GET /hello`、无需鉴权、返回 `{"message": "Hello, World!"}`。
+- 2026-11-26 22:29:48 用户补充范围：nova 与 cinder 两个仓库都要新增该接口；设为并列任务，分支名一致。
+- 2026-11-26 22:32:35 部署与集成测试未配置环境，按规则 SKIPPED，未验证端到端行为。
+- cinder 的 `.gitignore` 中 `/.` 会忽略 `.wally/`，已在 01/02 完成并确认后加 `!.wally/` 例外，确保 SOP 产物可纳入 Git 跟踪。
+- 2026-11-26 22:43:42 最终 Review PASS，无阻断性缺陷；Commit/Push/MR 等待用户明确授权。
+
+## 风险与未验证边界
+
+- 未在真实 WSGI 服务中做端到端验证（Deploy/IT 未配置）。
+- `APIRouter` 运行时路由表未验证（本机 `oslo.context` 版本不兼容）。
+
+## 提交结果
+
+- 提交准备：已完成
+- Commit：已执行（`feat: add GET /hello endpoint to cinder v3 API`）
+- Push：已执行（`feature/hello-world-api` → `origin/feature/hello-world-api`）
+- MR：已创建，PR #8：https://github.com/errrror/cinder/pull/8
