@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "deploy": {
+    "command": "cd contrib/block-box && make base && make lvm && docker-compose up -d",
+    "guide": ".wally/docs/devops/test-env-deploy.md",
+    "verify": "cd contrib/block-box && docker-compose ps (all services Up); a volume list against the noauth endpoint http://127.0.0.1:8776/v3 succeeds with OS_AUTH_TYPE=noauth, CINDER_ENDPOINT, OS_PROJECT_ID and OS_USERNAME",
+    "rollback": "No rollback or version-restore command is defined in the repository; see gaps",
+    "readiness": "pending",
+    "gaps": [
+      "No dedicated test-environment target, owner, or authorization boundary is defined; contrib/block-box is a containerized development example, not a configured test environment",
+      "No secure credential source: docker-compose.yml and docker-entrypoint-initdb.d/script.sql use hard-coded sample passwords, and cinder.rc uses sample noauth values",
+      "No rollback or version-restore procedure/command is documented, and no effective-version check is defined",
+      "The base-image build depends on the loci-cinder source at git.openstack.org, which may be unavailable; no acceptance criteria are defined for deployment readiness"
+    ]
+  },
+  "it": {
+    "command": "tox -e all-plugin -- volume (run from a Tempest checkout with the in-tree Cinder plugin installed)",
+    "guide": ".wally/docs/integration_test/integration_test.md",
+    "success_criteria": "All selected Tempest volume plugin tests pass with zero failures and zero errors; empty or all-skipped runs are not a pass; assertion failures, environment errors, and execution errors are distinguished and recorded with command, code version, test identifiers, output, and conclusion",
+    "readiness": "pending",
+    "gaps": [
+      "No configured target environment: Tempest must run from an external checkout against a devstack deployment with Cinder enabled; no such environment or endpoint is defined in this repository",
+      "No secure credential acquisition method: the only auth example is a hard-coded local.conf sample (ADMIN_PASSWORD=secret) in cinder/tests/tempest/README.rst",
+      "No pinned Cinder/Tempest/devstack versions and no repository-defined aggregate IT gate thresholds beyond a successful test run"
+    ]
+  }
+}
