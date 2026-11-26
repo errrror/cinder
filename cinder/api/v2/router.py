@@ -27,6 +27,7 @@ from cinder.api.v2 import snapshots
 from cinder.api.v2 import types
 from cinder.api.v2 import volume_metadata
 from cinder.api.v2 import volumes
+from cinder.api.v2 import welcome
 from cinder.api import versions
 
 
@@ -41,6 +42,12 @@ class APIRouter(cinder.api.openstack.APIRouter):
                        action='index')
 
         mapper.redirect("", "/")
+
+        self.resources['welcome'] = welcome.create_resource()
+        mapper.connect("welcome", "/welcome",
+                       controller=self.resources['welcome'],
+                       action='index',
+                       conditions={"method": ['GET']})
 
         self.resources['volumes'] = volumes.create_resource(ext_mgr)
         mapper.resource("volume", "volumes",
