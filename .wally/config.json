@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "deploy": {
+    "command": "cd contrib/block-box && make && docker-compose up -d",
+    "guide": ".wally/docs/devops/test-env-deploy.md",
+    "verify": "docker run -it -e OS_AUTH_TYPE=noauth -e CINDERCLIENT_BYPASS_URL=http://cinder-api:8776/v3 -e OS_PROJECT_ID=foo -e OS_VOLUME_API_VERSION=3.27 --network blockbox_default cinderclient list",
+    "rollback": "",
+    "readiness": "pending",
+    "gaps": [
+      "No designated target test environment, owner, deployment scope, or authorization boundary is configured; contrib/block-box only documents an optional local containerized example.",
+      "No approved credential source for a target environment is defined: contrib/block-box/cinder.rc is a noauth sample with placeholder OS_PROJECT_ID=myproject and OS_USERNAME=bubba, uses OS_AUTH_SYSTEM while README.md documents OS_AUTH_TYPE, and the compose file hardcodes MYSQL_ROOT_PASSWORD=password.",
+      "No rollback trigger, rollback command, or data-cleanup procedure is documented for the containerized stack.",
+      "No explicit deployment acceptance criteria or effective-version verification step is defined; starting services and listing volumes are documented only as usage, not as a validated gate."
+    ]
+  },
+  "it": {
+    "command": "tox -e functional",
+    "guide": ".wally/docs/integration_test/integration_test.md",
+    "success_criteria": "",
+    "readiness": "pending",
+    "gaps": [
+      "No integration-test target environment is configured in this workspace; the Tempest plugin suite requires an external Tempest checkout and a running devstack with Nova/Glance/Keystone, as documented in cinder/tests/tempest/README.rst.",
+      "No tempest.conf or credential acquisition path is provided; only a sample devstack local.conf with placeholder passwords is documented.",
+      "The functional suite requires a prepared database (tools/test-setup.sh) and may start Cinder services; no such environment is configured here.",
+      "No explicit IT success criteria, thresholds, cleanup, or evidence location is defined in the repository; generic tox exit status is not a documented acceptance gate."
+    ]
+  }
+}
